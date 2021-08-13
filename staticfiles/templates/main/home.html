@@ -1,0 +1,30 @@
+    {% extends "main/base.html" %}
+    {% block content %}
+
+    <div id="main">
+        <div id="head">
+            <h1 id="step">🖼️</h1>
+            <h1 id="time-to-show">કૃપા કરીને ફોટોફ્રેમ પસંદ કરો </h1>
+            <h1 id="select-frame">Please select a photoframe</h1>
+        </div>
+        <div></div>
+    </div>
+
+
+       <div class="container mt-40">
+            <div class="row mt-30">
+ {% for i in frames %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="box14">
+                    <a href="{% url 'upload' i.id %}">
+                        <img src="{{ i.frame.url }}" alt="">
+                        <div class="box-content">
+                        </div>
+                    </a>
+                    </div>
+                </div>
+{% endfor %}
+            </div>
+        </div>
+
+  {% endblock content %}

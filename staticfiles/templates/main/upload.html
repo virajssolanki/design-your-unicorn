@@ -1,0 +1,201 @@
+    {% extends "main/base.html" %}
+    {% load crispy_forms_tags %}
+    {% block content %}
+
+          {% if f_instance %}
+    <div id="main">
+        <div id="head">
+            <h1 id="step">🙌 </h1>
+            <h1 id="select-frame">તમારો ફોટો તૈયાર છે, <br>ડાઉનલોડ કરો અને શેર કરો</h1>
+        </div>
+        <div></div>
+    </div>
+
+       <div class="container mt-40">
+            <div class="row mt-30">
+                <div class="col-md-4 col-sm-6">
+                    <div class="box14">
+                        <img src="{{ f_instance.m_img.url }}" alt="">
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-12 col-sm-12 col-12">
+                        <a href="{{ f_instance.m_img.url }}" download="myphoto">
+                        <button type="button" class="btn btn-primary btn-block download"> 
+                        <i class="fa fa-download" aria-hidden="true"></i> ડાઉનલોડ
+                        </button>
+                        </a>
+                      </div>
+
+                      <div class="col-md-12 col-sm-12 col-12">
+                        <a href="{% url 'home' %}" download="myphoto">
+                        <button style="margin-top: 1rem;" type="button" class="btn btn-primary btn-block download"> 
+                        <i class="fa fa-external-link" aria-hidden="true"></i> બીજો ફોટો બનાવો
+                        </button>
+                        </a>
+                      </div>
+
+                    </div>
+
+                </div>
+
+<script>
+function download(url, filename) {
+fetch(url).then(function(t) {
+    return t.blob().then((b)=>{
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(b);
+        a.setAttribute("download", filename);
+        a.click();
+    }
+    );
+});
+}
+</script>
+            </div>
+        </div>
+          
+          {% else %}
+
+    <div id="main">
+        <div id="head">
+            <h1 id="step">📷</h1>
+            <h1 id="time-to-show">તમારો ફોટો અને વિગતો અપલોડ કરો </h1>
+            <h1 id="select-frame">Upload your photo and Details</h1>
+        </div>
+        <div></div>
+    </div>
+
+          <div class="register-photo">
+              <div class="form-container">
+                  <form method="post" enctype="multipart/form-data" id="formUpload">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  </form>
+              </div>
+          </div>
+
+        <div class="container">
+          <div class="row">
+          <div class="col-md-4 col-sm-4 col-12"></div>
+                      <div class="col-md-4 col-sm-4 col-12">
+                        <a href="{% url 'home' %}" download="myphoto">
+                        <button type="button" class="btn btn-secondary btn-block download"> 
+                        <i class="fa fa-external-link" aria-hidden="true"> </i> એક અલગ ફ્રેમ પસંદ કરો
+                        </button>
+                        </a>
+                      </div>
+           <div class="col-md-4 col-sm-4 col-12"></div>
+          </div>
+        </div>
+          {% endif %}
+
+        <!-- MODAL TO CROP THE IMAGE -->
+        <div class="modal fade" id="modalCrop">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!---<div class="modal-header">
+                <h4 class="modal-title">Crop the photo</h4>
+              </div>-->
+              <div class="modal-body">
+                <img src="" id="image" style="max-width: 100%;">
+              </div>
+              <div class="modal-footer">
+                <div class="btn-group pull-left" role="group">
+                  <button type="button" class="btn btn-default js-zoom-in">
+                    <span class="glyphicon glyphicon-zoom-in"></span>
+                  </button>
+                  <button type="button" class="btn btn-default js-zoom-out">
+                    <span class="glyphicon glyphicon-zoom-out"></span>
+                  </button>
+                </div>
+                <button type="button" class="btn btn-primary btn-block download js-crop-and-upload"> 
+                        <i class="fa fa-upload" aria-hidden="true"></i> અપલોડ કરો
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!--<div class="container">
+         CONTAINER TO DISPLAY THE CROPPED IMAGES 
+        <h3> Selected frame </h3>
+          {% if frame_img %}
+            <img height="500px" src="{{ frame_img.frame.url }}">
+          {% endif %}
+
+        <h3> User Image </h3>
+          {% if instance %}
+            <img height="500px" src="{{ instance.img.url }}">
+          {% endif %}
+        <br>
+
+        <h3> Merged Image </h3>
+          {% if instance %}
+            <img height="500px" src="{{ f_instance.m_img.url }}">
+          {% endif %}
+        <br>
+</div> -->
+    {% endblock content %}
+
+    {% block js %}
+  <script>
+    $(function () {
+
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+      $("#id_img").change(function () {
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData;
+      var canvasData;
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 1,
+          aspectRatio: 1/1,
+          minCropBoxWidth: 173,
+          minCropBoxHeight: 198,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+          }
+        });
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      // Enable zoom in button
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      // Enable zoom out button
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x").val(cropData["x"]);
+        $("#id_y").val(cropData["y"]);
+        $("#id_height").val(cropData["height"]);
+        $("#id_width").val(cropData["width"]);
+        $("#formUpload").submit();
+      });
+
+    });
+  </script>
+{% endblock %}
