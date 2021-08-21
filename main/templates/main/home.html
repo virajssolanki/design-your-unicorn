@@ -1,33 +1,56 @@
     {% extends "main/base.html" %}
+    {% load static %}
     {% block content %}
 
-    <div id="main">
-        <div id="head">
-            <h1 id="step">🖼️</h1>
-            <h1 id="time-to-show">કૃપા કરીને ફોટોફ્રેમ પસંદ કરો </h1>
-            <h1 id="select-frame">Please select a photoframe</h1>
-        </div>
-        <div></div>
-    </div>
+  <!-- hero section -->
+  <section id="hero">
+    <div class="container">
+      <p class="number"></p>
+      
+      <h1 class="hero-heading">Design Your Unicorn</br></h1>
+      <p class="number-desc">Inviting Entrepreneurs and Investors to come forward and commit themselves to Support the India's Dream of becoming a $5 Trillion Dollar Economy by 2025</p>
+      <p class="hero-heading-desc"></p>
 
-    <div class="container mt-40">
-        <div class="row mt-30">
+<!--     <div class="row">
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Tie a band </h3>
+          <p class="icon-desc">Tie a band across your eyes and try to work through your routine</p>
+        </div>
+
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Tie one hand</h3>
+          <p class="icon-desc">Tie one hand and work through your day</p>
+        </div>
+
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon3.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Plug in plugs </h3>
+          <p class="icon-desc">Plug-in noise-canceling earplugs and figure out how to listen ... To people talk.</p>
+        </div>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- Row 2 -->
+  <section id="row2">
+    <div class="container">
+      <h1 class="join-heading">Show Your Support</h1>
+      <p class="join-desc">Select the frame and create your custom image to share with the world.</p>
+      <div class="row">
+
  {% for i in frames %}
-            <div class="col-md-4 col-sm-6">
-                <div class="box14">
-                {% if i.orientation == 'landscape' %}
-                <a href="{% url 'l_upload' i.id %}">
-                {% else %}
-                <a href="{% url 'upload' i.id %}">
-                {% endif %}
-                    <img src="{{ i.frame.url }}" alt="">
-                    <div class="box-content">
-                    </div>
-                </a>
-                </div>
-            </div>
-{% endfor %}
-            </div>
+        <div class="col-lg-6">
+          <img src="{{ i.frame.url }}" alt="" width="100%" class="frame-img">
+          <h2 class="frame-heading">{{ i.frame_heading }}</h2>
+          <p class="frame-desc">{{ i.frame_desc }}</p>
+          <a href="{% url 'upload' i.id %}" class="frame-link">Select this challange</a>
         </div>
+{% endfor %}
 
-  {% endblock content %}
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

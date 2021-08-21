@@ -1,0 +1,148 @@
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Header section */
+.header-btn {
+  background: #EDC109;
+  border: none;
+}
+
+.btn-primary{
+  color: #000;
+}
+
+.header-btn:hover {
+  background: #EDC109;
+  border: none;
+}
+
+#header .container {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
+/* Hero section */
+#hero {
+  background-image: url('../img/bg1.png');
+  color: #fff;
+  text-align: center;
+  padding: 125px 0 50px 0;
+  background-position: center;
+  background-size: cover;
+}
+
+.number {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 64px;
+  margin-bottom: 10px;
+}
+
+.number-desc {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+.hero-heading{
+font-weight: 800;
+font-size: 72px;
+line-height: 110%;
+letter-spacing: 0.01em;
+text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+margin-bottom: 30px;
+}
+.hero-heading-desc{
+  font-size: 18px;
+line-height: 130%;
+margin-bottom: 50px;
+}
+/* Iconbox of hero */
+.icon-img{
+  margin-bottom: 30px;
+}
+.icon-heading{
+  font-size: 24px;
+line-height: 32px;
+}
+.icon-desc{
+  font-size: 16px;
+line-height: 26px;
+}
+/* Row2 css*/
+#row2{
+  padding: 50px 0;
+  text-align: center;
+}
+.join-heading{
+  font-weight: 800;
+  font-size: 48px;
+line-height: 64px;
+color: #18191F;
+}
+.join-desc{
+  font-size: 18px;
+line-height: 32px;
+margin-bottom: 50px;
+}
+
+/* Frame images */
+.frame-img{
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.frame-heading{
+  font-weight: 600;
+font-size: 24px;
+line-height: 32px;
+color: #18191F;
+}
+.frame-desc{
+  font-size: 16px;
+line-height: 26px;
+color: #18191F;
+}
+
+.frame-link{
+  font-weight: 600;
+font-size: 16px;
+line-height: 26px;
+color: #F54748;
+text-decoration: none;
+}
+
+.frame-link:hover{
+    color: #E30C0E;
+
+}
+.frame-link:after {
+    content: url(../img/arrow.png);
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+#footer{
+  text-align: center;
+  background:#0B0D17;
+  color: #D9DBE1;
+  padding: 30px 0;
+}
+.footer-text{
+font-size: 14px;
+line-height: 24px;
+margin-bottom: 0;
+}
+
+
+/* media queries*/
+@media only screen and (max-width: 1100px) {
+  .hero-heading {
+    font-weight: 800;
+    font-size: 54px;
+}
+}
