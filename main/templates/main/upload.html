@@ -2,10 +2,11 @@
     {% load crispy_forms_tags %}
     {% block content %}
 
-          {% if img_data %}
+    {% if img_data %}
+    
     <div id="main">
         <div id="head">
-            <h1 id="step">🙌 </h1>
+            <h1 id="step">🙌   </h1>
             <h1 id="select-frame">તમારો ફોટો તૈયાર છે, <br>ડાઉનલોડ કરો અને શેર કરો</h1>
         </div>
         <div></div>
@@ -55,11 +56,11 @@ fetch(url).then(function(t) {
           
           {% else %}
 
+<div class="container">
     <div id="main">
         <div id="head">
             <h1 id="step">📷</h1>
-            <h1 id="time-to-show">તમારો ફોટો અને વિગતો અપલોડ કરો </h1>
-            <h1 id="select-frame">Upload your photo and Details</h1>
+            <h1 id="select-frame">Fill up the details and make your commitment</h1>
         </div>
         <div></div>
     </div>
@@ -79,7 +80,7 @@ fetch(url).then(function(t) {
                       <div class="col-md-4 col-sm-4 col-12">
                         <a href="{% url 'home' %}">
                         <button type="button" class="btn btn-secondary btn-block"> 
-                        <i class="fa fa-external-link" aria-hidden="true"> </i> એક અલગ ફ્રેમ પસંદ કરો
+                        <i class="fa fa-external-link" aria-hidden="true"> </i> Change
                         </button>
                         </a>
                       </div>
@@ -87,6 +88,7 @@ fetch(url).then(function(t) {
           </div>
           {% endif %}
 
+</div>
         <!-- MODAL TO CROP THE IMAGE -->
         <div class="modal fade" id="modalCrop">
           <div class="modal-dialog">
@@ -107,7 +109,7 @@ fetch(url).then(function(t) {
                   </button>
                 </div>
                 <button type="button" class="btn btn-primary btn-block download js-crop-and-upload"> 
-                        <i class="fa fa-upload" aria-hidden="true"> </i> અપલોડ કરો
+                        <i class="fa fa-upload" aria-hidden="true"> </i> Upload
                 </button>
               </div>
             </div>
