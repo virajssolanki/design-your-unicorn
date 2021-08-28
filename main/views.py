@@ -94,10 +94,11 @@ def l_upload(request, pk):
             w = form.cleaned_data.get('width')
             h = form.cleaned_data.get('height')
             name = form.cleaned_data.get('name')
-            village = form.cleaned_data.get('village')
-            number = form.cleaned_data.get('number')
-            nl = ' , '
-            info= f'નામ: {name}{nl}ગામ: {village}'
+            email = form.cleaned_data.get('email')
+            designation = form.cleaned_data.get('designation')
+            company_name = form.cleaned_data.get('company_name')
+            commitment_1 = form.cleaned_data.get('commitment_1')
+            commitment_2 = form.cleaned_data.get('commitment_2')
 
             i_rgb = Image.open(img)
             if i_rgb.mode != "RGB":
@@ -110,21 +111,29 @@ def l_upload(request, pk):
             m = Image.open(mask_img_obj).convert('L').resize(f.size)
 
             cropped_image = i.crop((x, y, w+x, h+y))
-            new = cropped_image.resize((344, 344), Image.ANTIALIAS)
+            new = cropped_image.resize((200, 200), Image.ANTIALIAS)
             resized_image = Image.new('RGB', (f.size), color = (255, 255, 255))
-            resized_image.paste(new, (509, 119))
+            resized_image.paste(new, (349, 439))
 
             if f.mode != "RGB":
                 f.convert('RGB')
 
             f = Image.composite(resized_image, f, m)
             draw = ImageDraw.Draw(f)
-            fontsize = 20
-            font = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'HindVadodara-Medium.ttf'), fontsize)
-            while font.getsize(info)[0] < 306:
-                fontsize += 1
-                font = ImageFont.truetype('HindVadodara-Medium.ttf',fontsize)  
-            draw.text((527, 497), info, fill =(52, 51, 140), font = font, align ="center") 
+            name_f = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'Montserrat-Bold.ttf'), 20)
+            designation_f = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'Montserrat-Medium.ttf'), 16)
+            company_f = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'Montserrat-Italic.ttf'), 15)
+            index_f = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'Montserrat-Bold.ttf'), 26)
+            commitment_f = ImageFont.truetype(os.path.join(settings.BASE_DIR, 'Montserrat-Bold.ttf'), 21)
+            #while font.getsize(info)[0] < 306:
+                #fontsize += 1
+                #font = ImageFont.truetype('HindVadodara-Medium.ttf', fontsize)  
+            draw.text((56, 713), name, fill =(1, 1, 1), font = name_f, align ="center") 
+            draw.text((56, 750), designation, fill =(1, 1, 1), font = designation_f, align ="center")
+            draw.text((56, 773), company_name, fill =(1, 1, 1), font = designation_f, align ="center") 
+            draw.text((223, 848), '8', fill =(1, 1, 1), font = index_f, align ="center") 
+            draw.text((808, 698), commitment_1, fill =(1, 1, 1), font = commitment_f, align ="center") 
+            draw.text((648, 768), commitment_2, fill =(1, 1, 1), font = commitment_f, align ="center") 
 
             thumb_io = BytesIO()
             f.save(thumb_io, format='PNG', quality=80)
@@ -136,9 +145,9 @@ def l_upload(request, pk):
 
             f_instance = Merged()
             #f_instance.m_img = f_inmemory_uploaded_file
-            f_instance.name = name
-            f_instance.village = village
-            f_instance.number = number
+            #f_instance.name = name
+            #f_instance.village = village
+            #f_instance.number = number
             f_instance.save()
     else:
         form = UimgForm()
