@@ -1,6 +1,7 @@
     {% extends "main/base.html" %}
     {% load crispy_forms_tags %}
     {% block content %}
+    {% load static %}
 
     {% if img_data %}
     
@@ -10,13 +11,12 @@
             <h1 id="step"></h1>
             <h1 id="select-frame">Your commitment certificate is here, <br>Dowwnload and share with the world.</h1>
         </div>
-        <div></div>
     </div>
-  </div>
+    </div>
 
-       <div class="container mt-40">
-            <div class="row mt-30">
-                <div class="col-md-4 col-sm-6">
+    <div class="container mt-40">
+          <div class="row mt-30">
+              <div class="col-md-4 col-sm-6">
                     <div class="box14">
                         <img src="{{ img_data }}" alt="">
                     </div>
@@ -40,32 +40,118 @@
                     </div>
                 </div>
 
-<script>
-function download(url, filename) {
-fetch(url).then(function(t) {
-    return t.blob().then((b)=>{
-        var a = document.createElement("a");
-        a.href = URL.createObjectURL(b);
-        a.setAttribute("download", filename);
-        a.click();
-    }
-    );
-});
-}
-</script>
+                  <script>
+                  function download(url, filename) {
+                  fetch(url).then(function(t) {
+                      return t.blob().then((b)=>{
+                          var a = document.createElement("a");
+                          a.href = URL.createObjectURL(b);
+                          a.setAttribute("download", filename);
+                          a.click();
+                      }
+                      );
+                  });
+                  }
+                  </script>
             </div>
         </div>
           
           {% else %}
 
-<div class="container">
-    <div id="main">
-        <div id="head">
-            <h1 id="step"></h1>
-            <h1 id="select-frame">Fill up the details and make your commitment</h1>
+
+
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-heading">Design Your Unicorn</br></h1>
+      <p class="number-desc">Inviting Entrepreneurs and Investors to come forward and commit themselves to Support the India's Dream of becoming a $5 Trillion Dollar Economy by 2025</p>
+      <p class="hero-heading-desc"></p>
+
+    <div class="row">
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Entrepreneurs</h3>
+          <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
         </div>
-        <div></div>
+
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Investors</h3>
+          <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
+        </div>
+
+        <div class="col-lg-4">
+          <img src="{% static 'main/assets/img/icon3.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Mentors</h3>
+          <p class="icon-desc">
+        </div>
+      </div>
     </div>
+  </section>
+
+<!-- MultiStep Form -->
+
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.min.js"></script>
+<div class="container">
+
+    <!-- Modal -->
+        <div class="modal-dialog modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="smartwizard">
+                        <ul>
+                            <li><a href="#step-1">1<br /><small>Your Info</small></a></li>
+                            <li><a href="#step-2">2<br /><small>Get Your Index</small></a></li>
+                            <li><a href="#step-3">3<br /><small>Commitment frame</small></a></li>
+                        </ul>
+                        <div>
+                            <div id="step-1">
+
+                  <form method="post" enctype="multipart/form-data" id="formUpload">
+                  {% csrf_token %}
+                  {{ form.name|as_crispy_field }}
+                  {{ form.email|as_crispy_field }}
+                  {{ form.designation|as_crispy_field }}
+                  {{ form.company_name|as_crispy_field }}
+                            </div>
+                            <div id="step-2">
+                  {{ form.qustion_1|as_crispy_field }}
+                  {{ form.qustion_2|as_crispy_field }}
+                  {{ form.qustion_3|as_crispy_field }}
+                  {{ form.qustion_4|as_crispy_field }}
+                            </div>
+                            <div id="step-3" class="">
+                  {{ form.commitment_1|as_crispy_field }}
+                  {{ form.commitment_2|as_crispy_field }}
+                  {{ form.img|as_crispy_field }}
+                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+
+<script type='text/javascript'>$(document).ready(function(){
+
+$('#smartwizard').smartWizard({
+selected: 0,
+theme: 'dots',
+autoAdjustHeight:true,
+transitionEffect:'fade',
+showStepURLhash: false,
+
+});
+
+});</script>
+
+<!-- /.MultiStep Form -->
+
+<!-- <div class="container">
 
           <div class="register-photo">
               <div class="form-container">
@@ -90,7 +176,8 @@ fetch(url).then(function(t) {
           </div>
           {% endif %}
 
-</div>
+</div> -->
+
         <!-- MODAL TO CROP THE IMAGE -->
         <div class="modal fade" id="modalCrop">
           <div class="modal-dialog">
@@ -199,4 +286,5 @@ fetch(url).then(function(t) {
 
     });
   </script>
+
 {% endblock %}

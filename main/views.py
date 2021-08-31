@@ -83,7 +83,7 @@ def simple_upload(request, pk):
     context = locals()
     return render(request, 'main/upload.html', context)
 
-def l_upload(request, pk):
+def upload(request, pk):
     if request.method == 'POST':
         form = UimgForm(request.POST, request.FILES)
         if form.is_valid():
@@ -93,12 +93,12 @@ def l_upload(request, pk):
             y = form.cleaned_data.get('y')
             w = form.cleaned_data.get('width')
             h = form.cleaned_data.get('height')
-            name = form.cleaned_data.get('name')
-            email = form.cleaned_data.get('email')
-            designation = form.cleaned_data.get('designation')
-            company_name = form.cleaned_data.get('company_name')
-            commitment_1 = form.cleaned_data.get('commitment_1')
-            commitment_2 = form.cleaned_data.get('commitment_2')
+            name = userinfo_form.cleaned_data.get('name')
+            email = userinfo_form.cleaned_data.get('email')
+            designation = userinfo_form.cleaned_data.get('designation')
+            company_name = userinfo_form.cleaned_data.get('company_name')
+            commitment_1 = userinfo_form.cleaned_data.get('commitment_1')
+            commitment_2 = userinfo_form.cleaned_data.get('commitment_2')
 
             i_rgb = Image.open(img)
             if i_rgb.mode != "RGB":
@@ -111,7 +111,7 @@ def l_upload(request, pk):
             m = Image.open(mask_img_obj).convert('L').resize(f.size)
 
             cropped_image = i.crop((x, y, w+x, h+y))
-            new = cropped_image.resize((200, 200), Image.ANTIALIAS)
+            new = cropped_image.resize((215, 215), Image.ANTIALIAS)
             resized_image = Image.new('RGB', (f.size), color = (255, 255, 255))
             resized_image.paste(new, (349, 439))
 
@@ -151,7 +151,7 @@ def l_upload(request, pk):
             f_instance.save()
     else:
         form = UimgForm()
-
+        
     frame_img = Frame.objects.filter(id=pk).first()
     context = locals()
     return render(request, 'main/upload.html', context)
