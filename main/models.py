@@ -1,6 +1,7 @@
 from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
 
+
 class Merged(models.Model):
     m_img = models.ImageField(default='d.png', upload_to='merged_pic')
     name = models.CharField(max_length=50, blank=False, default='')
@@ -15,6 +16,8 @@ class Frame(models.Model):
     mask = models.ImageField(default='d.png', upload_to='mask_img')
     frame_heading = models.CharField(max_length=150, blank=False, default='')
     frame_desc = models.CharField(max_length=350, blank=False, default='')
+    page_title = models.CharField(max_length=150, blank=False, default='')
+    page_desc = models.CharField(max_length=350, blank=False, default='')
     def __str__(self):
         return f'{self.id} frame'
 

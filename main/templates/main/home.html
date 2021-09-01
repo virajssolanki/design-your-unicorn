@@ -5,7 +5,7 @@
   <!-- hero section -->
   <section id="hero">
     <div class="container">
-      <h1 class="hero-heading">Design Your Unicorn</br></h1>
+      <h1 class="hero-heading">Design Your Unicorn</h1>
       <p class="number-desc">Inviting Entrepreneurs and Investors to come forward and commit themselves to Support the India's Dream of becoming a $5 Trillion Dollar Economy by 2025</p>
       <p class="hero-heading-desc"></p>
 
@@ -39,11 +39,11 @@
       <div class="row">
 
  {% for i in frames %}
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img src="{{ i.frame.url }}" alt="" width="100%" class="frame-img">
           <h2 class="frame-heading">{{ i.frame_heading }}</h2>
           <p class="frame-desc">{{ i.frame_desc }}</p>
-          <a href="{% url 'l_upload' i.id %}" class="frame-link">Commitment</a>
+          <a href="{% url 'upload' i.id %}" class="frame-link">Commitment</a>
         </div>
 {% endfor %}
 
