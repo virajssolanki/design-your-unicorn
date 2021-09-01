@@ -93,9 +93,10 @@
 <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.min.css" rel="stylesheet" type="text/css" />
 <link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.min.js"></script>
-<div class="container">
 
+    <div class="container">
     <!-- Modal -->
+
         <div class="modal-dialog modal-lg modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -105,34 +106,35 @@
                             <li><a href="#step-2">2<br /><small>Get Your Index</small></a></li>
                             <li><a href="#step-3">3<br /><small>Commitment frame</small></a></li>
                         </ul>
-                        <div>
-                            <div id="step-1">
+                    <div>    
 
-                  <form method="post" enctype="multipart/form-data" id="formUpload">
-                  {% csrf_token %}
-                  {{ form.name|as_crispy_field }}
-                  {{ form.email|as_crispy_field }}
-                  {{ form.designation|as_crispy_field }}
-                  {{ form.company_name|as_crispy_field }}
-                            </div>
-                            <div id="step-2">
-                  {{ form.qustion_1|as_crispy_field }}
-                  {{ form.qustion_2|as_crispy_field }}
-                  {{ form.qustion_3|as_crispy_field }}
-                  {{ form.qustion_4|as_crispy_field }}
-                            </div>
-                            <div id="step-3" class="">
-                  {{ form.commitment_1|as_crispy_field }}
-                  {{ form.commitment_2|as_crispy_field }}
-                  {{ form.img|as_crispy_field }}
-                  </form>
-                            </div>
-                        </div>
+                    <div id="step-1">
+                      <form method="post" enctype="multipart/form-data" id="formUpload">
+                        {% csrf_token %}
+                        {{ form.name|as_crispy_field }}
+                        {{ form.email|as_crispy_field }}
+                        {{ form.designation|as_crispy_field }}
+                        {{ form.company_name|as_crispy_field }}
+                    </div>
+                    <div id="step-2">
+                        {{ form.qustion_1|as_crispy_field }}
+                        {{ form.qustion_2|as_crispy_field }}
+                        {{ form.qustion_3|as_crispy_field }}
+                        {{ form.qustion_4|as_crispy_field }}                      
+                    </div>
+                    <div id="step-3" class="">
+                        {{ form.commitment_1|as_crispy_field }}  
+                        {{ form.commitment_2|as_crispy_field }}    
+                        {{ form.img|as_crispy_field }}
+                        {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}   
+                      </form>              
                     </div>
                 </div>
-            </div>
+              </div>
         </div>
-</div>
+     </div>
 
 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
 

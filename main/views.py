@@ -93,12 +93,12 @@ def upload(request, pk):
             y = form.cleaned_data.get('y')
             w = form.cleaned_data.get('width')
             h = form.cleaned_data.get('height')
-            name = userinfo_form.cleaned_data.get('name')
-            email = userinfo_form.cleaned_data.get('email')
-            designation = userinfo_form.cleaned_data.get('designation')
-            company_name = userinfo_form.cleaned_data.get('company_name')
-            commitment_1 = userinfo_form.cleaned_data.get('commitment_1')
-            commitment_2 = userinfo_form.cleaned_data.get('commitment_2')
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            designation = form.cleaned_data.get('designation')
+            company_name = form.cleaned_data.get('company_name')
+            commitment_1 = form.cleaned_data.get('commitment_1')
+            commitment_2 = form.cleaned_data.get('commitment_2')
 
             i_rgb = Image.open(img)
             if i_rgb.mode != "RGB":
