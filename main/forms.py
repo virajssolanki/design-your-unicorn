@@ -33,18 +33,18 @@ class UimgForm(forms.Form):
         self.fields['commitment_2'].label = "I commit myself to generate ______ Jobs "
 
 
-class QuizForm(forms.ModelForm):
-    answer = forms.ModelChoiceField(
-        queryset=Answer.objects.none(),
-        widget=forms.RadioSelect(),
-        required=True,
-        empty_label=None)
+# class QuizForm(forms.ModelForm):
+#     answer = forms.ModelChoiceField(
+#         queryset=Answer.objects.none(),
+#         widget=forms.RadioSelect(),
+#         required=True,
+#         empty_label=None)
 
-    class Meta:
-        model = Choice
-        fields = ('answer', )
+#     class Meta:
+#         model = Choice
+#         fields = ('answer', )
 
-    def __init__(self, *args, **kwargs):
-        question = kwargs.pop('question')
-        super().__init__(*args, **kwargs)
-        self.fields['answer'].queryset = question.answers.order_by('text')
+#     def __init__(self, *args, **kwargs):
+#         question = kwargs.pop('question')
+#         super().__init__(*args, **kwargs)
+#         self.fields['answer'].queryset = question.answers.order_by('text')
