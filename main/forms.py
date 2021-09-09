@@ -1,5 +1,5 @@
 from django import forms
-from .models import Uimg
+from .models import Uimg, Choice
 
 CHOICES = (('item_key1', 'Item title 1.1'),
           ('item_key2', 'Item title 1.2'),
@@ -31,3 +31,20 @@ class UimgForm(forms.Form):
         self.fields['img'].label = "Upload a Photo"
         self.fields['commitment_1'].label = "I commit myself to generate Rs. ______ revenues"
         self.fields['commitment_2'].label = "I commit myself to generate ______ Jobs "
+
+
+class QuizForm(forms.ModelForm):
+    answer = forms.ModelChoiceField(
+        queryset=Answer.objects.none(),
+        widget=forms.RadioSelect(),
+        required=True,
+        empty_label=None)
+
+    class Meta:
+        model = Choice
+        fields = ('answer', )
+
+    def __init__(self, *args, **kwargs):
+        question = kwargs.pop('question')
+        super().__init__(*args, **kwargs)
+        self.fields['answer'].queryset = question.answers.order_by('text')

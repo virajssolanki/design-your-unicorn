@@ -1,7 +1,7 @@
 import os
 from django.conf import settings
 from django.shortcuts import render
-from .models import Frame, Uimg, Merged
+from .models import Frame, Uimg, Merged, Campaign
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from PIL import Image, ImageDraw, ImageFont, ImageOps
@@ -17,6 +17,15 @@ def home(request):
     frames = Frame.objects.all().order_by('-pk')
     context = locals()
     return render(request, 'main/home.html', context)
+
+
+def index(request, country_code, language_code):
+    campaign = Campaign.objects.filter(country_code=country_code).filter(language_code=language_code).first()
+    frames = Frame.objects.filter(campaign=campaign).order_by('-pk')
+    context = locals()
+    print(context)
+    return render(request, 'main/index.html', context)
+
 
 # def simple_upload(request, pk):
 #     if request.method == 'POST':

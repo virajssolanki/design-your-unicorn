@@ -1,60 +1,49 @@
-<!DOCTYPE html>
-<html>
+    {% extends "main/base.html" %}
+    {% load static %}
+    {% block content %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Advanced-NavBar---Multi-dropdown.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/css/Lightbox-Gallery.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
+  <!-- hero section -->
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-heading">{{ campaign.title}}</h1>
+      <p class="number-desc">{{ campaign.description}}</p>
+      <p class="hero-heading-desc"></p>
 
-<body id="body">
-    <div>
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean">
-            <div class="container"><a class="navbar-brand" href="#">MakeMyFrame</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse"
-                    id="navcol-1">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <hr id="hr">
-    <div id="main">
-        <div id="head">
-            <h1 id="time-to-show">It's time to show your support</h1>
-            <h1 id="select-frame">select a frame from below and make your own photo</h1>
+    <div class="row">
+        <div class="col-lg-6">
+          <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Entrepreneurs</h3>
+          <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
         </div>
-        <div></div>
-    </div>
-    <div class="photo-gallery">
-        <div class="container">
-            <div class="row photos">
 
-   {% for i in frames %}
-   
-             <div class="col-sm-6 col-md-4 col-lg-3 item">
-                 <a href="{% url 'upload' i.id %}">
-                    <img class="img-fluid" src="{{ i.frame.url }}">
-                 </a>
-             </div>
-            
-    {% endfor %}
-             </div>
+        <div class="col-lg-6">
+          <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
+          <h3 class="icon-heading">Investors</h3>
+          <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
         </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Advanced-NavBar---Multi-dropdown.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
-</body>
 
-</html>
+      </div>
+    </div>
+  </section>
+
+  <!-- Row 2 -->
+  <section id="row2">
+    <div class="container">
+      <h1 class="join-heading">{{ campaign.description}}</h1>
+      <p class="join-desc">{{ campaign.sub_description}}</p>
+      <div class="row">
+
+ {% for i in frames %}
+        <div class="col-lg-6">
+          <img src="{{ i.frame.url }}" alt="" width="100%" class="frame-img">
+          <h2 class="frame-heading">{{ i.frame_heading }}</h2>
+          <p class="frame-desc">{{ i.frame_desc }}</p>
+          <a href="{% url 'upload' i.id %}" class="frame-link">Commitment</a>
+        </div>
+{% endfor %}
+
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}
