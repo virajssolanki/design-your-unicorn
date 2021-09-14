@@ -43,7 +43,7 @@
           <img src="{{ i.frame.url }}" alt="" width="100%" class="frame-img">
           <h2 class="frame-heading">{{ i.frame_heading }}</h2>
           <p class="frame-desc">{{ i.frame_desc }}</p>
-          <a href="{% url 'upload' i.id %}" class="frame-link">Commitment</a>
+          <a href="{% url 'upload' i.id i.campaign.id %}" class="frame-link">Commitment</a>
         </div>
 {% endfor %}
 

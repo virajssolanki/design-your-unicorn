@@ -21,10 +21,18 @@ class UimgForm(forms.Form):
     width = forms.FloatField(widget=forms.HiddenInput())
     height = forms.FloatField(widget=forms.HiddenInput())
 
+    qustion_1 = forms.ChoiceField(choices=CHOICES, 
+        widget=forms.RadioSelect(), required=False, 
+        label="Are you aware on how to evaluate the startup on these checklist points ?")
+    qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
+    qustion_3 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
+    qustion_4 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
     qustion_1 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
     qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
     qustion_3 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
     qustion_4 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
+    qustion_1 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
+    qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
 
     def __init__(self, *args, **kwargs):
         super(UimgForm, self).__init__(*args, **kwargs)
@@ -34,8 +42,22 @@ class UimgForm(forms.Form):
 
 
 # class QuizForm(forms.ModelForm):
+
+#     # def __init__(self, question, *args, **kwargs):
+#     #     super(QuizForm, self).__init__(*args, **kwargs)
+#     #     choice_list = [x for x in question.get_answers_list()]
+#     #     self.fields["answers"] = forms.ChoiceField(choices=choice_list, widget=RadioSelect)
+
+# choice_list = [x for x in Choice.objects.all(),]
+
+#     def __init__(self, *args, **kwargs):
+#         super(MyModelForm, self).__init__(*args, **kwargs)
+#         for foo, bar in jelly:
+#             self.fields[foo] = forms.CharField(widget=forms.Textarea())
+
+
 #     answer = forms.ModelChoiceField(
-#         queryset=Answer.objects.none(),
+#         queryset=Choice.objects.none(),
 #         widget=forms.RadioSelect(),
 #         required=True,
 #         empty_label=None)
