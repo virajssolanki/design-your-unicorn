@@ -118,9 +118,6 @@
                       </form> 
 
                     </div>
-                    <div id="step-3" class="">
-             
-                    </div>
                 </div>
               </div>
         </div>
@@ -140,6 +137,35 @@ showStepURLhash: false,
 });
 
 });</script>
+
+<!-- /.MultiStep Form -->
+
+<!-- <div class="container">
+
+          <div class="register-photo">
+              <div class="form-container">
+                  <form method="post" enctype="multipart/form-data" id="formUpload">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  </form>
+              </div>
+          </div>
+
+        <div class="container">
+          <div class="row">
+          <div class="col-md-4 col-sm-4 col-12"></div>
+                      <div class="col-md-4 col-sm-4 col-12">
+                        <a href="{% url 'home' %}">
+                        <button type="button" class="btn btn-secondary btn-block"> 
+                        <i class="fa fa-external-link" aria-hidden="true"> </i> Change
+                        </button>
+                        </a>
+                      </div>
+           <div class="col-md-4 col-sm-4 col-12"></div>
+          </div>
+          {% endif %}
+
+</div> -->
 
         <!-- MODAL TO CROP THE IMAGE -->
         <div class="modal fade" id="modalCrop">
@@ -168,6 +194,25 @@ showStepURLhash: false,
           </div>
         </div>
 
+<!--<div class="container">
+         CONTAINER TO DISPLAY THE CROPPED IMAGES 
+        <h3> Selected frame </h3>
+          {% if frame_img %}
+            <img height="500px" src="{{ frame_img.frame.url }}">
+          {% endif %}
+
+        <h3> User Image </h3>
+          {% if instance %}
+            <img height="500px" src="{{ instance.img.url }}">
+          {% endif %}
+        <br>
+
+        <h3> Merged Image </h3>
+          {% if instance %}
+            <img height="500px" src="{{ f_instance.m_img.url }}">
+          {% endif %}
+        <br>
+</div> -->
     {% endblock content %}
 
     {% block js %}
