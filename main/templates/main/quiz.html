@@ -1,0 +1,54 @@
+    {% extends "main/base.html" %}
+    {% load crispy_forms_tags %}
+    {% block content %}
+    {% load static %}
+
+
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-heading">Investment Readiness Index</br></h1>
+      <p class="number-desc">Inviting Entrepreneurs and Investors to come forward and commit themselves to Support the India's Dream of becoming a $5 Trillion Dollar Economy by 2025</p>
+      <p class="hero-heading-desc"></p>
+
+      <div class="row">
+          <div class="col-lg-6">
+            <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
+            <h3 class="icon-heading">Entrepreneurs</h3>
+            <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
+          </div>
+
+          <div class="col-lg-6">
+            <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
+            <h3 class="icon-heading">Investors</h3>
+            <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
+          </div>
+
+        </div>
+    </div>
+  </section> 
+
+<!-- MultiStep Form -->
+
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/smart_wizard_theme_dots.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.smartWizard.min.js"></script>
+
+    <div class="container">
+    <!-- Modal -->
+
+        <div class="modal-dialog modal-lg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+              <div id="step-1">                
+              <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ formset }}
+              <input type="submit" class="btn btn-primary">    
+              </form> 
+              </div>
+
+        </div>
+     </div>
+
+    {% endblock content %}

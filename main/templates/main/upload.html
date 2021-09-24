@@ -65,23 +65,18 @@
       <p class="hero-heading-desc"></p>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
           <h3 class="icon-heading">Entrepreneurs</h3>
           <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
           <h3 class="icon-heading">Investors</h3>
           <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
         </div>
 
-        <div class="col-lg-4">
-          <img src="{% static 'main/assets/img/icon3.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Mentors</h3>
-          <p class="icon-desc">
-        </div>
       </div>
     </div>
   </section>
@@ -102,7 +97,6 @@
                         <ul>
                             <li><a href="#step-1">1<br /><small>Your Info</small></a></li>
                             <li><a href="#step-2">2<br /><small>Get Your Index</small></a></li>
-                            <li><a href="#step-3">3<br /><small>Commitment frame</small></a></li>
                         </ul>
                     <div>    
 
@@ -115,16 +109,17 @@
                         {{ form.company_name|as_crispy_field }}
                     </div>
                     <div id="step-2">
-                        {{ form.qustion_1|as_crispy_field }}
-                    </div>
-                    <div id="step-3" class="">
                         {{ form.commitment_1|as_crispy_field }}  
                         {{ form.commitment_2|as_crispy_field }}    
                         {{ form.img|as_crispy_field }}
                         {% for hidden in form.hidden_fields %}
                             {{ hidden }}
                         {% endfor %}   
-                      </form>              
+                      </form> 
+
+                    </div>
+                    <div id="step-3" class="">
+             
                     </div>
                 </div>
               </div>
@@ -145,35 +140,6 @@ showStepURLhash: false,
 });
 
 });</script>
-
-<!-- /.MultiStep Form -->
-
-<!-- <div class="container">
-
-          <div class="register-photo">
-              <div class="form-container">
-                  <form method="post" enctype="multipart/form-data" id="formUpload">
-                  {% csrf_token %}
-                  {{ form|crispy }}
-                  </form>
-              </div>
-          </div>
-
-        <div class="container">
-          <div class="row">
-          <div class="col-md-4 col-sm-4 col-12"></div>
-                      <div class="col-md-4 col-sm-4 col-12">
-                        <a href="{% url 'home' %}">
-                        <button type="button" class="btn btn-secondary btn-block"> 
-                        <i class="fa fa-external-link" aria-hidden="true"> </i> Change
-                        </button>
-                        </a>
-                      </div>
-           <div class="col-md-4 col-sm-4 col-12"></div>
-          </div>
-          {% endif %}
-
-</div> -->
 
         <!-- MODAL TO CROP THE IMAGE -->
         <div class="modal fade" id="modalCrop">
@@ -202,25 +168,6 @@ showStepURLhash: false,
           </div>
         </div>
 
-<!--<div class="container">
-         CONTAINER TO DISPLAY THE CROPPED IMAGES 
-        <h3> Selected frame </h3>
-          {% if frame_img %}
-            <img height="500px" src="{{ frame_img.frame.url }}">
-          {% endif %}
-
-        <h3> User Image </h3>
-          {% if instance %}
-            <img height="500px" src="{{ instance.img.url }}">
-          {% endif %}
-        <br>
-
-        <h3> Merged Image </h3>
-          {% if instance %}
-            <img height="500px" src="{{ f_instance.m_img.url }}">
-          {% endif %}
-        <br>
-</div> -->
     {% endblock content %}
 
     {% block js %}

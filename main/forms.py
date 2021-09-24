@@ -1,5 +1,5 @@
 from django import forms
-from .models import Uimg, Choice
+from .models import Uimg, Choice, Question
 
 CHOICES = (('item_key1', 'Item title 1.1'),
           ('item_key2', 'Item title 1.2'),
@@ -23,16 +23,7 @@ class UimgForm(forms.Form):
 
     qustion_1 = forms.ChoiceField(choices=CHOICES, 
         widget=forms.RadioSelect(), required=False, 
-        label="Are you aware on how to evaluate the startup on these checklist points ?")
-    qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_3 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_4 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_1 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_3 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_4 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_1 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
-    qustion_2 = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect(), required=False)
+        label='Are you aware on how to evaluate the startup on these checklist points ?')
 
     def __init__(self, *args, **kwargs):
         super(UimgForm, self).__init__(*args, **kwargs)
@@ -41,32 +32,18 @@ class UimgForm(forms.Form):
         self.fields['commitment_2'].label = "I commit myself to generate ______ Jobs "
 
 
-# class QuizForm(forms.ModelForm):
+class QuizForm(forms.Form):
+    def __init__(self, question, *args, **kwargs):
+        super(QuizForm, self).__init__(*args, **kwargs)
+        choice_list = tuple((x.percentage, x.choice ) for x in Choice.objects.filter(question=question).all())
+        self.fields["answer"] = forms.ChoiceField(choices=choice_list, widget=forms.RadioSelect(), 
+                                                    required=False, 
+                                                    label=question.question)
 
-#     # def __init__(self, question, *args, **kwargs):
-#     #     super(QuizForm, self).__init__(*args, **kwargs)
-#     #     choice_list = [x for x in question.get_answers_list()]
-#     #     self.fields["answers"] = forms.ChoiceField(choices=choice_list, widget=RadioSelect)
-
-# choice_list = [x for x in Choice.objects.all(),]
-
-#     def __init__(self, *args, **kwargs):
-#         super(MyModelForm, self).__init__(*args, **kwargs)
-#         for foo, bar in jelly:
-#             self.fields[foo] = forms.CharField(widget=forms.Textarea())
+class BaseQuizFormSet(forms.BaseFormSet):
+    def get_form_kwargs(self, index):
+        kwargs = super().get_form_kwargs(index)
+        q = kwargs['questions'][index]
+        return {'question': q}
 
 
-#     answer = forms.ModelChoiceField(
-#         queryset=Choice.objects.none(),
-#         widget=forms.RadioSelect(),
-#         required=True,
-#         empty_label=None)
-
-#     class Meta:
-#         model = Choice
-#         fields = ('answer', )
-
-#     def __init__(self, *args, **kwargs):
-#         question = kwargs.pop('question')
-#         super().__init__(*args, **kwargs)
-#         self.fields['answer'].queryset = question.answers.order_by('text')
