@@ -3,34 +3,25 @@
     {% block content %}
 
   <!-- hero section -->
-  <section id="hero">
+  <section id="hero" style="background-image: url('{{ home.background.url }}');">
     <div class="container">
-      <h1 class="hero-heading">Design Your Unicorn</h1>
-      <p class="number-desc">Inviting Entrepreneurs and Investors to come forward and commit themselves to Support the India's Dream of becoming a $5 Trillion Dollar Economy by 2025</p>
+      <h1 class="hero-heading">{{ home.title}}</h1>
+      <p class="number-desc">{{ home.description}}</p>
       <p class="hero-heading-desc"></p>
 
     <div class="row">
+     {% for i in campaign %}
         <div class="col-lg-4">
-          <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Entrepreneurs</h3>
-          <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
+          <img src="{{ i.icon.url}}" alt="" class="icon-img">
+          <h3 class="icon-heading">{{ i.title }}</h3>
+          <p class="icon-desc">{{ i.description }}</p>
+          <a href="{% url 'campaign' campaign_id=i.id %}" class="frame-link">{{ i.cta }}</a>
         </div>
-
-        <div class="col-lg-4">
-          <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Investors</h3>
-          <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
-        </div>
-
-        <div class="col-lg-4">
-          <img src="{% static 'main/assets/img/icon3.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Mentors</h3>
-          <p class="icon-desc">
-        </div>
+      {% endfor %}
       </div>
     </div>
   </section>
-
+{% comment %} 
   <!-- Row 2 -->
   <section id="row2">
     <div class="container">
@@ -49,6 +40,6 @@
 
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
 {% endblock content %}

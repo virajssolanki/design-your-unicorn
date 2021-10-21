@@ -1,0 +1,25 @@
+Name
+Font size: 25.28
+Font type: Montserrat Bold
+The point on canvas
+X: 47.9 to 326.2
+Y: 634
+
+Designation
+Font size: 20.4
+Font type: Montserrat Medium
+The point on canvas
+X: 47.9 to 326.2
+Y: 677.2 to 888
+
+Commitment
+Font size: 27.78
+Font type: Montserrat Bold
+The point on canvas
+X: 714 to 1028.8
+Y: 633.5 to 834.7
+
+Photo
+
+X: 369.6 to 579.4
+Y: 669.9

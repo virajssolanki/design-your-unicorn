@@ -3,34 +3,17 @@
     {% block content %}
 
   <!-- hero section -->
-  <section id="hero">
+  <section id="hero" style="background-image: url('{{ campaign.background.url }}');">
     <div class="container">
       <h1 class="hero-heading">{{ campaign.title}}</h1>
-      <p class="number-desc">{{ campaign.description}}</p>
-      <p class="hero-heading-desc"></p>
-
-    <div class="row">
-        <div class="col-lg-6">
-          <img src="{% static 'main/assets/img/icon1.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Entrepreneurs</h3>
-          <p class="icon-desc"><b>358</b> Entrepreneurs committed collectively 10000+ employment generation and <b>3400000 INR</b>revenues  </p>
-        </div>
-
-        <div class="col-lg-6">
-          <img src="{% static 'main/assets/img/icon2.png' %}" alt="" class="icon-img">
-          <h3 class="icon-heading">Investors</h3>
-          <p class="icon-desc"><b>358</b> Investors committed collectively<b>3400000 INR</b>funds to help indian startyp ecosystem. </p>
-        </div>
-
-      </div>
-    </div>
+      <p class="hero-heading-desc">{{ campaign.description}}</p>
   </section>
 
   <!-- Row 2 -->
   <section id="row2">
     <div class="container">
-      <h1 class="join-heading">{{ campaign.description}}</h1>
-      <p class="join-desc">{{ campaign.sub_description}}</p>
+      <h1 class="join-heading">{{ campaign.commitment_section_title }}</h1>
+      <p class="join-desc">{{ campaign.commitment_section_description}}</p>
       <div class="row">
 
  {% for i in frames %}
@@ -38,12 +21,12 @@
           <img src="{{ i.frame.url }}" alt="" width="100%" class="frame-img">
           <h2 class="frame-heading">{{ i.frame_heading }}</h2>
           <p class="frame-desc">{{ i.frame_desc }}</p>
-          <a href="{% url 'upload' frame_id=i.id campaign_id=i.campaign.id %}" class="frame-link">Commitment</a>
+          <a href="{% url 'upload' i.id i.campaign.id %}" class="frame-link">{{ i.cta }}</a>
         </div>
 {% endfor %}
 
       </div>
     </div>
-  </section>
+  </section> 
 
 {% endblock content %}

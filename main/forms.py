@@ -12,8 +12,7 @@ class UimgForm(forms.Form):
     email = forms.EmailField(max_length = 200)
     designation = forms.CharField(required=False) 
     company_name = forms.CharField(required=False)
-    commitment_1 = forms.CharField(required=False)
-    commitment_2 = forms.CharField(required=False)
+    commitment = forms.CharField(required=False)
 
     img = forms.ImageField()
     x = forms.FloatField(widget=forms.HiddenInput())
@@ -28,9 +27,7 @@ class UimgForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UimgForm, self).__init__(*args, **kwargs)
         self.fields['img'].label = "Upload a Photo"
-        self.fields['commitment_1'].label = "I commit myself to generate Rs. ______ revenues"
-        self.fields['commitment_2'].label = "I commit myself to generate ______ Jobs "
-
+        self.fields['commitment'].label = "Your commit statement"
 
 class QuizForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
